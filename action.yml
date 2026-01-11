@@ -63,7 +63,8 @@ runs:
           rm Gemfile.bak
           
           gem install bundler --no-document
-          
+          bundle update --bundler
+
           bundle install
           bundle update --ruby
           echo "Updated Gemfile and dependencies"
@@ -110,6 +111,7 @@ runs:
         - Updated Gemfile ruby version (if present)
         - Updated Dockerfile ruby version (if present)
         - Updated Gemfile.lock dependencies
+        - Updated bundler to latest version
 
         Please review and test before merging.
         
