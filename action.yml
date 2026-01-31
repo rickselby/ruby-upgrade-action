@@ -26,7 +26,7 @@ runs:
   using: composite
   steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Determine target Ruby version
       shell: bash
@@ -74,10 +74,10 @@ runs:
           echo "Updated Gemfile and dependencies"
         fi
 
-        if [ -f "${{ inputs.target-ruby-version }}" ]; then
-          sed -i.bak "s/FROM ruby:[0-9.]*\(-.*\)\?/FROM ruby:${{ env.TARGET_RUBY_VERSION }}\1/" "${{ inputs.target-ruby-version }}"
-          rm "${{ inputs.target-ruby-version }}".bak
-          echo "Updated "${{ inputs.target-ruby-version }}""
+        if [ -f "${{ inputs.dockerfile-location }}" ]; then
+          sed -i.bak "s/FROM ruby:[0-9.]*\(-.*\)\?/FROM ruby:${{ env.TARGET_RUBY_VERSION }}\1/" "${{ inputs.dockerfile-location }}"
+          rm "${{ inputs.dockerfile-location }}".bak
+          echo "Updated "${{ inputs.dockerfile-location }}""
         fi
 
     - name: Check for changes
