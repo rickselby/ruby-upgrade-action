@@ -38,6 +38,14 @@ runs:
           echo "TARGET_RUBY_VERSION=$LATEST_RUBY" >> $GITHUB_ENV
         fi
 
+    # Workaround: The ubuntu-latest runner image (20260126.10+) ships a pre-installed Ruby 4.0.1
+    # that causes native extension builds and bundler operations to fail. Removing it forces
+    # setup-ruby to download a working build from ruby-builder instead.
+    # See https://github.com/ruby/rubygems/issues/9284.
+    - name: Remove pre-installed Ruby 4.0
+      shell: bash
+      run: rm -rf /opt/hostedtoolcache/Ruby/4.0*
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
